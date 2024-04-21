@@ -1,49 +1,5 @@
-// import { createSlice } from '@reduxjs/toolkit';
-// import { fetchSubjects } from './subAction.js';
-
-// const initialState = {
-//   subjects: [],
-//   selectedSubject: {},
-//   selectedChapter: {},
-//   loading: false,
-//   error: null,
-//   success: false,
-// };
-
-// const subSlice = createSlice({
-//   name: 'subjects',
-//   initialState,
-//   reducers: {
-//     setSelectedSubject: (state, action) => {
-//       state.selectedSubject = action.payload;
-//     },
-//     setSelectChapter: (state, action) => {
-//       state.selectedChapter = action.payload;
-//     },
-//   },
-//   extraReducers(builder) {
-//     builder
-//       .addCase(fetchSubjects.pending, (state) => {
-//         state.loading = true;
-//       })
-//       .addCase(fetchSubjects.fulfilled, (state, action) => {
-//         state.loading = false;
-//         state.subjects = action.payload.data;
-//         state.error = null;
-//         state.success = true;
-//       })
-//       .addCase(fetchSubjects.rejected, (state, action) => {
-//         state.loading = false;
-//         state.error = action.payload.error;
-//       });
-//   },
-// });
-
-// export const { setSelectedSubject, setSelectChapter } = subSlice.actions;
-// export default subSlice.reducer;
-
 import { createSlice } from '@reduxjs/toolkit';
-import { fetchSubjects } from './subAction.js';
+import * as subActions from './subAction.js';
 
 const initialState = {
   subjects: [],
@@ -57,27 +13,45 @@ const initialState = {
 const subSlice = createSlice({
   name: 'subjects',
   initialState,
-  reducers: {
-    setSelectedSubject: (state, action) => {
-      state.selectedSubject = action.payload;
-      console.log('Selected Subject', action.payload);
-    },
-    setSelectChapter: (state, action) => {
-      state.selectedChapter = action.payload;
-    },
-  },
+  reducers: {},
   extraReducers(builder) {
     builder
-      .addCase(fetchSubjects.pending, (state) => {
+      .addCase(subActions.fetchSubjects.pending, (state) => {
         state.loading = true;
       })
-      .addCase(fetchSubjects.fulfilled, (state, action) => {
+      .addCase(subActions.fetchSubjects.fulfilled, (state, action) => {
         state.loading = false;
         state.subjects = action.payload.data;
         state.error = null;
         state.success = true;
       })
-      .addCase(fetchSubjects.rejected, (state, action) => {
+      .addCase(subActions.fetchSubjects.rejected, (state, action) => {
+        state.loading = false;
+        state.error = action.payload.error;
+      })
+      .addCase(subActions.setSelectedSubject.pending, (state) => {
+        state.loading = true;
+      })
+      .addCase(subActions.setSelectedSubject.fulfilled, (state, action) => {
+        state.loading = false;
+        state.selectedSubject = action.payload.data;
+        state.error = null;
+        state.success = true;
+      })
+      .addCase(subActions.setSelectedSubject.rejected, (state, action) => {
+        state.loading = false;
+        state.error = action.payload.error;
+      })
+      .addCase(subActions.setSelectedChapter.pending, (state) => {
+        state.loading = true;
+      })
+      .addCase(subActions.setSelectedChapter.fulfilled, (state, action) => {
+        state.loading = false;
+        state.selectedChapter = action.payload.data;
+        state.error = null;
+        state.success = true;
+      })
+      .addCase(subActions.setSelectedChapter.rejected, (state, action) => {
         state.loading = false;
         state.error = action.payload.error;
       });

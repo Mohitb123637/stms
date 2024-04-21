@@ -30,20 +30,32 @@ import Sidebar from './components/Sidebar';
 import Subject from './Pages/subject/Subject';
 import Topic from './Pages/topic/Topic';
 import Summary from './Pages/Summary/Summary';
-import { Route, Routes } from 'react-router-dom';
+import { Route, Routes, useLocation } from 'react-router-dom';
 import Login from './Pages/login/Login';
 import PrivateRoute from './components/private/PrivateRoute';
+import StartExam from './Pages/assignment/StartExam';
+import Assignment from './Pages/assignment/Assignment';
+import ResultPage from './Pages/assignment/Result';
+import Report from './Pages/Report/Report';
 
 function App() {
+  const location = useLocation();
+
+  // Check if the current route is the login page
+  const isLoginPage = location.pathname === '/login';
   return (
-    <div className="flex">
+    <div className={isLoginPage ? '' : 'flex'}>
       <Sidebar />
       <Routes>
         <Route path="/" element={<PrivateRoute />}>
           <Route path="/" element={<Home />} />
           <Route path="/chapters/:id" element={<Subject />} />
-          <Route path="/topic" element={<Topic />} />
-          <Route path="/summary" element={<Summary />} />
+          <Route path="/topics/:id" element={<Topic />} />
+          <Route path="/summary/:id" element={<Summary />} />
+          <Route path="/startExam/:id" element={<StartExam />} />
+          <Route path="/assignments/:id" element={<Assignment />} />
+          <Route path="/finalSubmit/:id" element={<ResultPage />} />
+          <Route path="/report/:id" element={<Report />} />
         </Route>
         <Route path="/login" element={<Login />} />
       </Routes>

@@ -39,7 +39,7 @@ export const fetchSubjects = createAsyncThunk(
   'user/fetchSubjects',
   async (_, { rejectWithValue }) => {
     try {
-      const response = await axiosConfig.post('/user/subject');
+      const response = await axiosConfig.get('/user/subjects');
       return response.data;
     } catch (error) {
       return rejectWithValue({
@@ -53,9 +53,25 @@ export const fetchSubjects = createAsyncThunk(
 
 export const setSelectedSubject = createAsyncThunk(
   'user/setSelectedSubject',
-  async (subject, { rejectWithValue }) => {
+  async (clickedSubject, { rejectWithValue }) => {
     try {
-      return subject;
+      const res = await axiosConfig.get(`/user/chapters/${clickedSubject}`);
+      return res.data;
+    } catch (error) {
+      return rejectWithValue({
+        error: error.response.data
+          ? error.response.data.message
+          : error.message,
+      });
+    }
+  }
+);
+export const setSelectedChapter = createAsyncThunk(
+  'user/setSelectedChapter',
+  async (clickedChapter, { rejectWithValue }) => {
+    try {
+      const res = await axiosConfig.get(`/user/topics/${clickedChapter}`);
+      return res.data;
     } catch (error) {
       return rejectWithValue({
         error: error.response.data

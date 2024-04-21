@@ -5,10 +5,19 @@ import { useDispatch, useSelector } from 'react-redux';
 import Left from './pages/Left';
 import Right from './pages/Right';
 import { fetchSubjects } from '../../../store/subject/subAction';
+import { useNavigate } from 'react-router-dom';
 
 const Home = () => {
+  const navigate = useNavigate;
   const dispatch = useDispatch();
-  const subjects = useSelector((state) => state.subjects.subjects);
+  const subjects = useSelector((state) => state.subjects.subjects.subjects);
+  const user = useSelector((state) => state.auth);
+
+  useEffect(() => {
+    if (!user) {
+      navigate('/login', { successLogin: true });
+    }
+  }, [navigate, user]);
 
   useEffect(() => {
     dispatch(fetchSubjects());

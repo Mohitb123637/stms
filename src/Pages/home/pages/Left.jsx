@@ -14,11 +14,13 @@ const Left = ({ subject }) => {
     'https://cdn.iconscout.com/icon/premium/png-256-thumb/physics-book-2054930-1730255.png?f=webp',
     'https://cdn3d.iconscout.com/3d/premium/thumb/mathematics-book-9167492-7471125.png',
   ];
-  // console.log(subject, 'subject is');
+  console.log(subject, 'subject is');
   const handleSubject = (clickedSubject) => {
     dispatch(setSelectedSubject(clickedSubject));
     console.log(clickedSubject, 'clickedSubject is');
-    navigate(`/chapters/${clickedSubject.subjectId}`);
+    setTimeout(() => {
+      navigate(`/chapters/${clickedSubject}`);
+    }, 2000);
   };
 
   return (
@@ -38,38 +40,40 @@ const Left = ({ subject }) => {
           />
         </div>
       </div>
-      {subject.length > 0 ? (
-        subject.map((subject, index) => (
-          <div
-            key={index}
-            className="w-full h-auto bg-gray-300 rounded-2xl shadow-md p-4 md:p-8 cursor-pointer mt-6"
-          >
-            <div className="flex flex-col md:flex-row justify-center md:justify-between items-center text-black">
+      {subject
+        ? subject.map((subject, index) => (
+            <>
               <div
-                className="flex items-center mb-4 md:mb-0"
-                onClick={() => handleSubject(subject)}
+                key={index}
+                className="w-full h-auto bg-gray-300 rounded-2xl shadow-md p-4 md:p-8 cursor-pointer mt-6"
               >
-                <img
-                  src={subImage[index]}
-                  alt={subject} // Assuming subject object has a name property
-                  className="h-12 w-12 rounded-md mr-4"
-                />
-                <h2 className="text-lg font-semibold">{subject.subjectName}</h2>
-              </div>
-              <div className="flex items-center">
-                <div className="mr-3 md:mr-6 text-sm font-semibold border-4 border-solid border-gray-800 rounded-full w-11 h-11 flex items-center justify-center">
-                  100%
+                <div className="flex flex-col md:flex-row justify-center md:justify-between items-center text-black">
+                  <div
+                    className="flex items-center mb-4 md:mb-0"
+                    onClick={() => handleSubject(subject.subjectId)}
+                  >
+                    <img
+                      src={subImage[index]}
+                      alt={subject} // Assuming subject object has a name property
+                      className="h-12 w-12 rounded-md mr-4"
+                    />
+                    <h2 className="text-lg font-semibold">
+                      {subject.subjectName}
+                    </h2>
+                  </div>
+                  <div className="flex items-center">
+                    <div className="mr-3 md:mr-6 text-sm font-semibold border-4 border-solid border-gray-800 rounded-full w-11 h-11 flex items-center justify-center">
+                      100%
+                    </div>
+                    <button className="px-3 md:px-4 py-2 text-white bg-gray-900 rounded-md hover:bg-black focus:outline-none">
+                      Quiz
+                    </button>
+                  </div>
                 </div>
-                <button className="px-3 md:px-4 py-2 text-white bg-gray-900 rounded-md hover:bg-black focus:outline-none">
-                  Quiz
-                </button>
               </div>
-            </div>
-          </div>
-        ))
-      ) : (
-        <></> // Empty fragment if subjects array is empty
-      )}
+            </>
+          ))
+        : null}
 
       {/* Time Spend box  */}
       <div className="flex w-full my-3 justify-between items-center p-6 space-y-4">

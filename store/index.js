@@ -6,15 +6,15 @@ import authReducer from './auth/authSlice';
 import { injectStore } from '../utils/axiosConfig';
 import subReducer from './subject/subSlice';
 // import chapReducer from './chapter/chapSlice';
-// import topicReducer from './topic/topicSlice';
-// import examReducer from './ai/aiQuizSlice';
+import topicReducer from './topic/topicSlice';
+import examReducer from './ai/aiQuizSlice';
 
 const rootReducer = combineReducers({
   auth: authReducer,
   subjects: subReducer,
   //   chapters: chapReducer,
-  //   topics: topicReducer,
-  //   exams: examReducer,
+  topics: topicReducer,
+  exams: examReducer,
 });
 
 const persistConfig = {

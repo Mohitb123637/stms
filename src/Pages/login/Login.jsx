@@ -4,15 +4,13 @@ import { Link, useNavigate } from 'react-router-dom';
 import { loginUser } from '../../../store/auth/authActions';
 
 const Login = () => {
-  const { user, loading } = useSelector((state) => state.auth);
-  const [wrongPassword, setWrongPassword] = useState(false);
+  const { user, loading, error } = useSelector((state) => state.auth);
   const [loginInProgress, setLoginInProgress] = useState(false);
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const emailRef = useRef('');
   const passwordRef = useRef('');
 
-  console.log(loading);
   useEffect(() => {
     if (user) {
       navigate('/', { successLogin: true });
@@ -29,51 +27,47 @@ const Login = () => {
       })
     )
       .unwrap()
-      .catch((errorData) => {
-        console.log(errorData);
-        setWrongPassword(true);
+      .then(() => {
+        // Login successful, no need to handle anything here as the useEffect will navigate
+      })
+      .catch(() => {
+        // Login failed, no need to handle anything here as error message will be displayed
+      })
+      .finally(() => {
         setLoginInProgress(false);
       });
   };
 
   return (
-    <div className="min-h-screen w-full flex justify-center items-center">
-      <div className="bg-gray-300 h-3/5 p-8 rounded-lg shadow-lg max-w-md w-full">
+    <div className="min-h-screen flex justify-center items-center bg-gray-100">
+      <div className="bg-white rounded-lg shadow-lg p-8 max-w-md w-full">
         <h2 className="text-3xl font-bold text-center text-gray-800 mb-6">
           Welcome Back!
         </h2>
         <form onSubmit={signinUser} className="space-y-6">
           <div>
-            <label htmlFor="email" className="block text-gray-700 text-lg">
-              Email
-            </label>
             <input
               ref={emailRef}
               type="email"
               id="email"
-              className="form-input w-full mt-1 px-4 py-2 rounded border-gray-400"
+              className="form-input w-full mt-1 px-4 py-2 rounded border-gray-300 focus:border-gray-400 focus:outline-none"
               placeholder="Enter your email"
             />
           </div>
           <div>
-            <label htmlFor="password" className="block text-gray-700 text-lg">
-              Password
-            </label>
             <input
               ref={passwordRef}
               type="password"
               id="password"
-              className="form-input w-full mt-1 px-4 py-2 rounded border-gray-400"
+              className="form-input w-full mt-1 px-4 py-2 rounded border-gray-300 focus:border-gray-400 focus:outline-none"
               placeholder="Enter your password"
             />
           </div>
-          {wrongPassword && (
-            <p className="text-red-500 text-sm">Invalid email or password.</p>
-          )}
+          {error && <p className="text-red-500 text-sm">{error}</p>}
           <button
             type="submit"
-            className="w-full bg-gray-800 text-lg text-white py-2 px-4 rounded hover:bg-black transition duration-300"
-            disabled={loginInProgress}
+            className="w-full bg-gray-800 text-lg text-white py-2 px-4 rounded hover:bg-gray-900 transition duration-300 focus:outline-none"
+            disabled={loginInProgress || loading}
           >
             {loginInProgress ? 'Logging in...' : 'Login'}
           </button>
