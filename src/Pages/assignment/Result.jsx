@@ -7,10 +7,12 @@ import {
   FaExclamationCircle,
 } from 'react-icons/fa';
 import { useSelector } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
 
 const ResultPage = () => {
+  const navigate = useNavigate();
   const handleCloseTab = () => {
-    window.close();
+    navigate('/');
   };
 
   const data = useSelector((state) => state.exams.resultData);

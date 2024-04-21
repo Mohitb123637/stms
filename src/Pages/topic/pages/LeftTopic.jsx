@@ -93,7 +93,7 @@ const LeftTopic = ({ topics }) => {
                   <button>Completed</button>
                 )}
               </div>
-              {topic.testEndFlag ? (
+              {!topic.testEndFlag ? (
                 <div
                   className=" cursor-pointer"
                   onClick={() =>

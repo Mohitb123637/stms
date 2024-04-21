@@ -12,6 +12,7 @@ const Home = () => {
   const dispatch = useDispatch();
   const subjects = useSelector((state) => state.subjects.subjects.subjects);
   const user = useSelector((state) => state.auth);
+  console.log(user);
 
   useEffect(() => {
     if (!user) {
