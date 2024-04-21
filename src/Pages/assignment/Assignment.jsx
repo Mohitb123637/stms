@@ -95,12 +95,12 @@ const Assignment = () => {
     );
 
     if (filterQuestions.length - 1 === currentQuestionIndex) {
-      setTimeout(() => {
-        dispatch(finalSubmit({ id, selectedDataObject }));
-      }, 3000);
-      setTimeout(() => {
-        navigate(`/finalSubmit/${id}`);
-      }, 5000);
+      // setTimeout(() => {
+      await dispatch(finalSubmit({ id, selectedDataObject }));
+      // }, 3000);
+      // setTimeout(() => {
+      navigate(`/finalSubmit/${id}`);
+      // }, 5000);
     }
   };
 

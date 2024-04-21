@@ -15,7 +15,12 @@ const Sidebar = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const location = useLocation();
-  const isLogin = location.pathname.includes('/login');
+  const isLogin =
+    location.pathname.includes('/login') ||
+    location.pathname.includes('/register') ||
+    location.pathname.includes('/startExam/') ||
+    location.pathname.includes('/assignments/') ||
+    location.pathname.includes('/finalSubmit/');
 
   if (isLogin) {
     return null;

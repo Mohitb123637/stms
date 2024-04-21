@@ -16,9 +16,9 @@ const LeftTopic = ({ topics }) => {
   ];
   const topicData = topics[0];
 
-  const handleSummary = (activityId) => {
+  const handleSummary = async (activityId) => {
     console.log(activityId);
-    dispatch(getTopicsAi(activityId));
+    await dispatch(getTopicsAi(activityId));
     setTimeout(() => {
       navigate(`/summary/${activityId}`);
     }, 2000);
@@ -93,7 +93,7 @@ const LeftTopic = ({ topics }) => {
                   <button>Completed</button>
                 )}
               </div>
-              {!topic.testEndFlag ? (
+              {topic.testEndFlag ? (
                 <div
                   className=" cursor-pointer"
                   onClick={() =>

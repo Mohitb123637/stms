@@ -37,12 +37,15 @@ import StartExam from './Pages/assignment/StartExam';
 import Assignment from './Pages/assignment/Assignment';
 import ResultPage from './Pages/assignment/Result';
 import Report from './Pages/Report/Report';
+import Register from './Pages/register/Register';
 
 function App() {
   const location = useLocation();
 
   // Check if the current route is the login page
-  const isLoginPage = location.pathname === '/login';
+  const isLoginPage =
+    location.pathname === '/login' || location.pathname === '/register';
+
   return (
     <div className={isLoginPage ? '' : 'flex'}>
       <Sidebar />
@@ -58,6 +61,7 @@ function App() {
           <Route path="/report/:id" element={<Report />} />
         </Route>
         <Route path="/login" element={<Login />} />
+        <Route path="/register" element={<Register />} />
       </Routes>
     </div>
   );

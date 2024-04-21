@@ -15,12 +15,12 @@ const Left = ({ subject }) => {
     'https://cdn3d.iconscout.com/3d/premium/thumb/mathematics-book-9167492-7471125.png',
   ];
   console.log(subject, 'subject is');
-  const handleSubject = (clickedSubject) => {
-    dispatch(setSelectedSubject(clickedSubject));
+  const handleSubject = async (clickedSubject) => {
+    await dispatch(setSelectedSubject(clickedSubject));
     console.log(clickedSubject, 'clickedSubject is');
-    setTimeout(() => {
-      navigate(`/chapters/${clickedSubject}`);
-    }, 2000);
+    // setTimeout(() => {
+    navigate(`/chapters/${clickedSubject}`);
+    // }, 2000);
   };
 
   return (

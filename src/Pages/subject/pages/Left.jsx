@@ -16,12 +16,12 @@ const Left = ({ chapter }) => {
     'https://www.thoughtco.com/thmb/N4O4JvwvxaqegLDow7XDd7xhi9A=/1500x0/filters:no_upscale():max_bytes(150000):strip_icc()/GettyImages-637481524-7788e3dc814645379debe599283b658d.jpg',
   ];
 
-  const handleChapter = (clickedChapter) => {
-    dispatch(setSelectedChapter(clickedChapter));
+  const handleChapter = async (clickedChapter) => {
+    await dispatch(setSelectedChapter(clickedChapter));
     console.log(clickedChapter, 'clickedSubject is');
-    setTimeout(() => {
-      navigate(`/topics/${clickedChapter}`);
-    }, 2000);
+    // setTimeout(() => {
+    navigate(`/topics/${clickedChapter}`);
+    // }, 2000);
   };
 
   return (

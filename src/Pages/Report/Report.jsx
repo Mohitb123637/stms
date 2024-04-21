@@ -15,9 +15,9 @@ const Report = () => {
   console.log(data);
 
   return (
-    <div className="flex container w-3/4 flex-col mx-auto mt-5 px-4">
+    <div className="flex container w-full flex-col mx-auto mt-5 px-4">
       <div
-        className="text-3xl font-bold self-center mb-5 text-white"
+        className="text-3xl font-bold w-5/6 ml-auto self-center mb-5 text-white"
         style={{
           background: 'linear-gradient(to right, #4F46E5, #2E8B57)',
           WebkitBackgroundClip: 'text',
@@ -26,7 +26,7 @@ const Report = () => {
       >
         Your Report
       </div>
-      <div className="grid w-full grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+      <div className="grid w-5/6 ml-auto grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
         <div className="bg-gradient-to-br from-purple-400 to-indigo-600 rounded-lg shadow-md p-5 flex flex-col justify-center items-center transition duration-300 hover:scale-105">
           <FaQuestion className="text-4xl mb-4 text-white" />
           <h2 className="text-lg font-semibold mb-2 text-white">
@@ -87,7 +87,7 @@ const Report = () => {
           <p className="text-gray-200">Content</p>
         </div>
       </div>
-      <div className=" mt-20 px-4">
+      <div className=" mt-20 px-4 w-5/6 ml-auto">
         {' '}
         <h2
           className="text-2xl font-bold mb-4 text-gray-800 text-center"
@@ -101,7 +101,7 @@ const Report = () => {
         </h2>{' '}
         {data.data.attendedQuestion.map((question, questionIndex) => (
           <div key={question._id} className="mb-4">
-            <p className="font-semibold mb-2 text-gray-600">
+            <p className="font-semibold my-3 text-xl text-gray-600">
               {' '}
               Question {questionIndex + 1}: {question.question}
             </p>
