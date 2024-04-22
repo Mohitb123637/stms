@@ -15,6 +15,13 @@ const ResultPage = () => {
     navigate('/');
   };
 
+  // Time taken
+  const startTime = new Date(data.data.testStartTime);
+  const endTime = new Date(data.data.testEndTime);
+  const timeTakenMs = endTime - startTime;
+  const timeTakenSec = Math.round(timeTakenMs / 1000);
+  const formattedTimeTaken = `${timeTakenSec} Minutes`;
+
   const data = useSelector((state) => state.exams.resultData);
   const skippedQuestions =
     data.data.totalQuestion.length - data.data.attendedQuestion.length;
@@ -70,7 +77,7 @@ const ResultPage = () => {
             <h2 className="text-lg font-semibold mb-2 text-white">
               Time Taken
             </h2>
-            <p className="text-gray-200">1 hour 30 minutes</p>
+            <p className="text-gray-200">{formattedTimeTaken}</p>
           </div>
 
           <div className="bg-gradient-to-br from-pink-400 to-blue-600 rounded-lg shadow-md p-2 flex flex-col justify-center items-center transition duration-300 hover:scale-105">
@@ -91,7 +98,13 @@ const ResultPage = () => {
           <div className="bg-gradient-to-br from-yellow-400 to-amber-600 rounded-lg shadow-md p-4 flex flex-col justify-center items-center transition duration-300 hover:scale-105">
             <FaCalendarAlt className="text-4xl mb-4 text-white" />
             <h2 className="text-lg font-semibold mb-2 text-white">Date</h2>
-            <p className="text-gray-200">March 28, 2024</p>
+            <p className="text-gray-200">
+              {new Date(data.data.testEndTime).toLocaleString('en-US', {
+                timeZone: 'UTC',
+                dateStyle: 'short',
+                timeStyle: 'short',
+              })}
+            </p>
           </div>
 
           <div className="bg-gradient-to-br from-purple-400 to-purple-500 rounded-lg shadow-md p-4 flex flex-col justify-center items-center transition duration-300 hover:scale-105">

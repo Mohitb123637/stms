@@ -4,7 +4,6 @@ import {
   FaClock,
   FaPercentage,
   FaCalendarAlt,
-  FaExclamationCircle,
   FaCheck,
 } from 'react-icons/fa';
 import { ImCross } from 'react-icons/im';
@@ -13,6 +12,13 @@ import { useSelector } from 'react-redux';
 const Report = () => {
   const data = useSelector((state) => state.exams.resultData);
   console.log(data);
+
+  // Time taken
+  const startTime = new Date(data.data.testStartTime);
+  const endTime = new Date(data.data.testEndTime);
+  const timeTakenMs = endTime - startTime;
+  const timeTakenSec = Math.round(timeTakenMs / 1000);
+  const formattedTimeTaken = `${timeTakenSec} Minutes`;
 
   return (
     <div className="flex container w-full flex-col mx-auto mt-5 px-4">
@@ -32,53 +38,50 @@ const Report = () => {
           <h2 className="text-lg font-semibold mb-2 text-white">
             Total Questions
           </h2>
-          <p className="text-gray-200">5</p>
+          <p className="text-gray-200">{data.data.totalQuestion.length}</p>
         </div>
         <div className="bg-gradient-to-br from-green-400 to-green-600 rounded-lg shadow-md p-5 flex flex-col justify-center items-center transition duration-300 hover:scale-105">
           <FaCheck className="text-4xl mb-4 text-white" />
           <h2 className="text-lg font-semibold mb-2 text-white">
             Right Questions
           </h2>
-          <p className="text-gray-200">3</p>
+          <p className="text-gray-200">{data.data.rightQuestion.length}</p>
         </div>
         <div className="bg-gradient-to-br from-pink-400 to-red-600 rounded-lg shadow-md p-5 flex flex-col justify-center items-center transition duration-300 hover:scale-105">
           <ImCross className="text-4xl mb-4 text-white" />
           <h2 className="text-lg font-semibold mb-2 text-white">
             Wrong Questions
           </h2>
-          <p className="text-gray-200">2</p>
-        </div>
-
-        <div className=" bg-gradient-to-br from-blue-400 to-cyan-600  rounded-lg shadow-md p-3 flex flex-col justify-center items-center transition duration-300 hover:scale-105">
-          <FaExclamationCircle className="text-4xl mb-4 text-white" />
-          <h2 className="text-lg font-semibold mb-2 text-white">
-            Skipped Questions
-          </h2>
-          <p className="text-gray-200">2</p>
+          <p className="text-gray-200">{data.data.wrongQuestion.length}</p>
         </div>
 
         <div className="bg-gradient-to-br from-orange-400 to-red-600 rounded-lg shadow-md p-3 flex flex-col justify-center items-center transition duration-300 hover:scale-105">
           <FaClock className="text-4xl mb-4 text-white" />
           <h2 className="text-lg font-semibold mb-2 text-white">Time Taken</h2>
-          <p className="text-gray-200">1 hour 30 minutes</p>
+          <p className="text-gray-200">{formattedTimeTaken}</p>
         </div>
-
-        <div className="bg-gradient-to-br from-pink-400 to-blue-600 rounded-lg shadow-md p-3 flex flex-col justify-center items-center transition duration-300 hover:scale-105">
+        <div className="bg-gradient-to-br from-pink-400 to-blue-600 rounded-lg shadow-md p-2 flex flex-col justify-center items-center transition duration-300 hover:scale-105">
           <FaPercentage className="text-4xl mb-4 text-white" />
           <h2 className="text-lg font-semibold mb-2 text-white">Percentage</h2>
           <div className="w-full bg-gray-300 h-6 rounded-full">
             <div
               className="bg-green-500 h-full rounded-full"
-              style={{ width: '70%' }}
+              style={{ width: `${data.data.percentage}%` }}
             ></div>
           </div>
-          <p className="text-gray-200">77%</p>
+          <p className="text-gray-200">{data.data.percentage + '%'}</p>
         </div>
 
         <div className="bg-gradient-to-br from-yellow-400 to-amber-600 rounded-lg shadow-md p-5 flex flex-col justify-center items-center transition duration-300 hover:scale-105">
           <FaCalendarAlt className="text-4xl mb-4 text-white" />
           <h2 className="text-lg font-semibold mb-2 text-white">Date</h2>
-          <p className="text-gray-200">March 28, 2024</p>
+          <p className="text-gray-200">
+            {new Date(data.data.testEndTime).toLocaleString('en-US', {
+              timeZone: 'UTC',
+              dateStyle: 'short',
+              timeStyle: 'short',
+            })}
+          </p>
         </div>
 
         <div className="bg-gradient-to-br from-purple-400 to-purple-500 rounded-lg shadow-md p-5 flex flex-col justify-center items-center transition duration-300 hover:scale-105">

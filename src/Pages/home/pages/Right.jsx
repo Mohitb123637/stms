@@ -64,10 +64,10 @@ const Right = () => {
       </div>
 
       {/* subject  */}
+      <h1 className=" text-gray-800 ml-auto w-4/5  text-2xl font-bold tracking-wider	">
+        Latest Progress
+      </h1>
       <div className="flex flex-col items-center ml-auto w-4/5  space-x-4 p-4 bg-gray-100">
-        <h1 className=" text-gray-800 text-2xl font-bold tracking-wider	">
-          Latest Progress
-        </h1>
         <div className="flex flex-col w-full ml-auto mb-3 mt-5 text-black justify-between items-center bg-gray-300 rounded-sm shadow-md p-6 space-y-4">
           <div className="flex w-full justify-between items-center">
             <h3 className="text-lg font-semibold">
@@ -150,9 +150,10 @@ const Right = () => {
           </div>
           <div>
             <img
-              src="https://th.bing.com/th/id/OIP.AbujA5LrP1pAOz-Q1OcqjwHaHk?rs=1&pid=ImgDetMain"
+              src="https://cdn.create.vista.com/api/media/small/30299933/stock-vector-books-stack"
               alt=""
-              className="w-48 h-auto shadow-lg"
+              style={{ mixBlendMode: 'multiply' }}
+              className="w-48 h-40"
             />
           </div>
         </div>

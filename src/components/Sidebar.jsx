@@ -1,3 +1,4 @@
+// import React from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { IoHomeOutline } from 'react-icons/io5';
 import { PiStudent } from 'react-icons/pi';
@@ -42,9 +43,11 @@ const Sidebar = () => {
 
   return (
     <div
-      className="fixed bg-black text-gray-400 w-14 sm:w-32 flex flex-col items-center rounded-xl shadow-right-bottom p-4 overflow-y-auto"
+      className="fixed bg-black text-gray-400 w-12 sm:w-32 flex flex-col items-center rounded-xl shadow-right-bottom p-4"
       style={{
         minHeight: '95vh',
+        maxHeight: '95vh',
+        overflowY: 'auto', // Allow vertical scrolling when content exceeds container height
         zIndex: 1000,
       }}
     >
